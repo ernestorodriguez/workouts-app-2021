@@ -1,11 +1,11 @@
 module.exports = {
   app: {
     port: 8080,
-    staticsFolder: 'build',
-    apiPath: '/api/',
+    staticsFolder: "build",
+    apiPath: "/api/",
   },
   site: {
-    name: 'Awesome workouts',
+    name: "Awesome workouts",
   },
   dataBase: {
     host: process.env.DB_HOST,

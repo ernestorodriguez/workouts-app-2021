@@ -1,9 +1,9 @@
-import express from 'express';
-import config from 'config';
+import express from "express";
+import config from "config";
 // import webApp from './app/server';
-import api from './api';
+import api from "./api";
 
-const { port, staticsFolder, apiPath } = config.get('app');
+const { port, staticsFolder, apiPath } = config.get("app");
 const App = express();
 
 App.use(express.static(staticsFolder));
