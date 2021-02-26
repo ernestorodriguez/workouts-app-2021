@@ -2,14 +2,13 @@ import WM from "./workoutsMiddlewares";
 jest.mock("../../lib/services/workoutsService");
 import workoutsService from "../../lib/services/workoutsService";
 import { NextFunction, Request, Response } from "express";
-import SpyInstance = jest.SpyInstance;
 
 let getSpy: jest.SpyInstance;
 let getPageSpy: jest.SpyInstance;
 
 interface MockReq {
-  status: SpyInstance;
-  json: SpyInstance;
+  status: jest.SpyInstance;
+  json: jest.SpyInstance;
 }
 
 describe("workoutsMiddlewares", () => {

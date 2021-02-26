@@ -1,23 +1,5 @@
-import config from "config";
-import sequelize, { Sequelize } from "sequelize";
-
-const sql = {
-  query: (a: any, b: any) => Promise.resolve(),
-  authenticate: () => Promise.resolve(),
-};
-
-if (process.env.NODE_ENV !== "test") {
-  const {
-    name: dbName,
-    user: dbUser,
-    password: dbPassword,
-    host: dbHost,
-  } = config.get("dataBase");
-  const sql = new Sequelize(dbName, dbUser, dbPassword, {
-    host: dbHost,
-    dialect: "mysql",
-  });
-}
+import sequelize from "sequelize";
+import sql from "./mySqlConnection";
 
 function querySelect(
   selection: string,
