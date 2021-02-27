@@ -5,6 +5,16 @@
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
-    "inlineSourceMap": true
-  }
+    "inlineSourceMap": true,
+    "jsx": "react",
+    "allowJs": true
+  },
+  "exclude": [
+    "node_modules",
+    "app/client/**/*",
+    "dist",
+    "build",
+    "coverage",
+    "config"
+  ]
 }
