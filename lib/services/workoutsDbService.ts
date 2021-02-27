@@ -4,6 +4,7 @@ import sql from "./mySqlConnection";
 function querySelect(
   selection: string,
   queryCondition: string
+  // eslint-disable-next-line @typescript-eslint/ban-types
 ): Promise<object> {
   return sql
     .query(`${selection}${queryCondition}`, {
@@ -22,7 +23,7 @@ interface Replacements {
   video_id: string;
 }
 
-const getKeys = (keys: string[], replacements: Replacements) => {
+const getKeys = (replacements: Replacements, keys?: string[]) => {
   let result = keys ? keys.join(", ") : "*";
   Object.keys(replacements).forEach((keyString: string) => {
     const key = keyString as keyof Replacements;
@@ -31,25 +32,34 @@ const getKeys = (keys: string[], replacements: Replacements) => {
   return result;
 };
 
-function getQueryCondition(startDate: string, selectedCategories: string) {
-  let query = "";
+function getQueryCondition(startDate?: string, selectedCategories?: string) {
+  if (!startDate && !selectedCategories) {
+    return "";
+  }
+
+  let query = " WHERE ";
+
   if (startDate) {
     const [year, month] = startDate.split("-");
-    query += ` WHERE month(start_date)=${Number.parseInt(
+    query += `month(start_date)=${Number.parseInt(
       month
     )} AND year(start_date)=${Number.parseInt(year)}`;
+  }
 
-    if (selectedCategories) {
-      query += ` AND category IN ("${selectedCategories.replace(
-        /,/g,
-        '","'
-      )}")`;
-    }
+  if (startDate && selectedCategories) {
+    query += " AND";
+  }
+
+  if (selectedCategories) {
+    query += ` category IN ("${selectedCategories.replace(
+      /,/g,
+      '","'
+    )}")`;
   }
   return query;
 }
 
-function getLimit(start: number, end: number) {
+function getLimit(start?: number, end?: number) {
   let query = "";
   if (start !== undefined) {
     query += ` LIMIT ${start}`;
@@ -62,15 +72,20 @@ function getLimit(start: number, end: number) {
 
 interface GetOptions {
   table: string;
-  columns: string[];
+  columns?: string[];
   replacements: Replacements;
-  start: number;
-  end: number;
-  startDate: string;
-  selectedCategories: string;
+  start?: number;
+  end?: number;
+  startDate?: string;
+  selectedCategories?: string;
 }
 
-const get = async (options: GetOptions) => {
+interface GetResponse {
+  data: any;
+  results: any;
+}
+
+const get = async (options: GetOptions): Promise<GetResponse> => {
   const {
     table,
     columns,
@@ -82,7 +97,7 @@ const get = async (options: GetOptions) => {
   } = options;
 
   const queryCondition = getQueryCondition(startDate, selectedCategories);
-  const selection = `SELECT ${getKeys(columns, replacements)} FROM ${table}`;
+  const selection = `SELECT ${getKeys(replacements, columns)} FROM ${table}`;
   return {
     data: await querySelect(
       selection,
@@ -108,8 +123,8 @@ const getByColumn = (
 ): Promise<any> => {
   const { table, columns, replacements } = config;
   const query = `SELECT ${getKeys(
-    columns,
-    replacements
+    replacements,
+    columns
   )} FROM ${table} WHERE ${table}.${column} = '${value}'`;
   return sql.query(query, {
     type: sequelize.QueryTypes.SELECT,

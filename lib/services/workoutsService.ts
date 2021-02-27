@@ -32,8 +32,8 @@ const replacements: Replacements = {
 
 const getWorkouts = (
   page: number,
-  startDate: string,
-  selectedCategories: string
+  startDate?: string,
+  selectedCategories?: string
 ) => {
   let currentPage = page;
 
