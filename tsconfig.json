@@ -10,11 +10,16 @@
     "allowJs": true
   },
   "exclude": [
-    "node_modules",
-    "app/client/**/*",
     "dist",
     "build",
     "coverage",
+    "node_modules",
+    "app",
+    "api",
+    "lib",
+    "babel.config.js",
+    "webpack.config.js",
     "config"
-  ]
+  ],
 }
+

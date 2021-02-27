@@ -4,6 +4,7 @@ import {
   getByColumn,
   Config,
   GetOptions,
+  GetResponse,
 } from "./workoutsDbService";
 
 const table = "workouts_calendar";
@@ -34,7 +35,7 @@ const getWorkouts = (
   page: number,
   startDate?: string,
   selectedCategories?: string
-) => {
+): Promise<GetResponse> => {
   let currentPage = page;
 
   if (page < 1) {

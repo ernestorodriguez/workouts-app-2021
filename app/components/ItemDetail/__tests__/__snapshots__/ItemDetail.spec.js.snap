@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemDetail component should match snapshot 1`] = `
+<section
+  className="item-detail"
+>
+  <header
+    data-js="name"
+  >
+    <h2>
+      NAME
+      <br />
+      <small
+        data-js="start-date"
+      >
+        2020-10
+      </small>
+    </h2>
+  </header>
+  <div
+    className="item-detail__badge"
+    data-js="category"
+  >
+    c1
+  </div>
+  <article
+    data-js="description"
+  >
+    DESCRIPTION
+  </article>
+</section>
+`;

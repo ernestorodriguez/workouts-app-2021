@@ -51,10 +51,7 @@ function getQueryCondition(startDate?: string, selectedCategories?: string) {
   }
 
   if (selectedCategories) {
-    query += ` category IN ("${selectedCategories.replace(
-      /,/g,
-      '","'
-    )}")`;
+    query += ` category IN ("${selectedCategories.replace(/,/g, '","')}")`;
   }
   return query;
 }
@@ -80,7 +77,7 @@ interface GetOptions {
   selectedCategories?: string;
 }
 
-interface GetResponse {
+export interface GetResponse {
   data: any;
   results: any;
 }

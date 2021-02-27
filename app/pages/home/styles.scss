@@ -1,0 +1,8 @@
+.home-page__title {
+  text-align: center;
+  color: #545454;
+}
+
+.home-page__title--lighter {
+  color: lighten($color: #545454, $amount: 40);
+}

@@ -1,13 +1,12 @@
+import { Request, Response, NextFunction } from "express";
 import workoutsService from "../../lib/services/workoutsService";
-
-import express from "express";
 
 export default class WorkoutsMiddlewares {
   static async detail(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     const { alias } = req.params;
     await workoutsService
       .get("alias", alias)
@@ -19,10 +18,10 @@ export default class WorkoutsMiddlewares {
   }
 
   static async list(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     const page: string = req.query.page as string;
     const pageNumber = Number(page);
     const startDate: string = req.query.startDate as string;

@@ -1,10 +1,9 @@
-
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const config = require("config");
 
 module.exports = {
   entry: {
-    spa: "./app/client/spa/index.ts",
+    spa: "./app/client/spa/index.tsx",
   },
   output: {
     path: `${__dirname}/${config.get("app.staticsFolder")}`,
@@ -38,6 +37,7 @@ module.exports = {
             loader: "sass-loader",
             options: { sourceMap: true },
           },
+          { loader: "css-modules-typescript-loader" },
         ],
       },
     ],
@@ -48,6 +48,6 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".css", ".scss"],
   },
 };

@@ -1,0 +1,33 @@
+.main-header {
+  background-color: #ff7f66;
+  padding: 20px;
+  position: relative;
+}
+
+.main-header__logo {
+  max-width: 150px;
+  margin: 0 auto;
+  display: block;
+}
+
+.back-home {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -25px;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+}
+
+.back-home__icon {
+  width: 100%;;
+  height: auto;
+  fill: white;
+}
+
+.main-header--internal {
+  .main-header__logo {
+    max-width: 100px;
+  }
+}

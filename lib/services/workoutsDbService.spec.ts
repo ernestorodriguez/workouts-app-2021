@@ -2,8 +2,6 @@ import * as WDBS from "./workoutsDbService";
 import sequelize from "sequelize";
 
 jest.mock("../../lib/services/mySqlConnection");
-
-import * as workoutsDbService from "./workoutsDbService";
 import { Config, GetOptions } from "./workoutsDbService";
 import mySqlConnection from "./mySqlConnection";
 

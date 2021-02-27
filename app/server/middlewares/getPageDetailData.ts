@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express";
 
 const { name: siteName } = config.get("site");
 
-export default (req: Request, res: Response, next: NextFunction) => {
+export default (req: Request, res: Response, next: NextFunction): void => {
   workoutsService
     .get("alias", req.params.alias)
     .then((response) => {
