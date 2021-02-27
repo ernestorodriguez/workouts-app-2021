@@ -4,9 +4,10 @@ import {
   getByColumn,
   Config,
   GetOptions,
-} from "./workoutsDBservice";
+} from "./workoutsDbService";
 
 const table = "workouts_calendar";
+const amountByPage = 20;
 
 const columns = [
   "id",
@@ -30,7 +31,7 @@ const replacements: Replacements = {
 };
 
 const getWorkouts = (
-  page = 1,
+  page: number,
   startDate: string,
   selectedCategories: string
 ) => {
@@ -40,7 +41,6 @@ const getWorkouts = (
     currentPage = 1;
   }
 
-  const amountByPage = 20;
   const max = amountByPage * currentPage;
 
   const options: GetOptions = {

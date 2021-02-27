@@ -14,7 +14,7 @@ function querySelect(
     });
 }
 
-export interface Replacements {
+interface Replacements {
   start_date: string;
   thumbnail_default: string;
   thumbnail_medium: string;
@@ -60,7 +60,7 @@ function getLimit(start: number, end: number) {
   return query;
 }
 
-export interface GetOptions {
+interface GetOptions {
   table: string;
   columns: string[];
   replacements: Replacements;
@@ -70,7 +70,7 @@ export interface GetOptions {
   selectedCategories: string;
 }
 
-export const get = async (options: GetOptions) => {
+const get = async (options: GetOptions) => {
   const {
     table,
     columns,
@@ -95,13 +95,17 @@ export const get = async (options: GetOptions) => {
   };
 };
 
-export interface Config {
+interface Config {
   table: string;
   columns: string[];
   replacements: Replacements;
 }
 
-export const getByColumn = (config: Config, column: string, value: string) => {
+const getByColumn = (
+  config: Config,
+  column: string,
+  value: string
+): Promise<any> => {
   const { table, columns, replacements } = config;
   const query = `SELECT ${getKeys(
     columns,
@@ -112,6 +116,4 @@ export const getByColumn = (config: Config, column: string, value: string) => {
   });
 };
 
-sql
-  .authenticate()
-  .catch((error) => console.error("Unable to connect to the database:", error));
+export { getByColumn, get, Config, GetOptions, Replacements };

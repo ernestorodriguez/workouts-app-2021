@@ -20,4 +20,8 @@ if (process.env.NODE_ENV !== "testing") {
   });
 }
 
+sqlConnection
+  .authenticate()
+  .catch((error) => console.error("Unable to connect to the database:", error));
+
 export default sqlConnection;
