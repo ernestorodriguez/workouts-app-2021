@@ -1,5 +1,6 @@
 import { galleryActions } from "../actions";
 import { GalleryItemProps } from "../../components/Gallery/GalleryItem";
+import { OrderedMonthsList } from "../../server/middlewares/utils/monthSelectorList";
 
 const { GET_PAGE_SUCCESS } = galleryActions;
 
@@ -10,7 +11,7 @@ export interface GalleryState {
   selectedCategories?: string[];
   totalPages?: number;
   totalWorkOuts?: number;
-  startDateSelector?: Record<string, unknown>;
+  startDateSelector?: OrderedMonthsList;
   availableCategories?: string[];
 }
 

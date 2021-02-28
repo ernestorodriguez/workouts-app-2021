@@ -1,5 +1,5 @@
 import express from "express";
-import getPageData from "./middlewares/getPageData";
+import getPageData from "./middlewares/getGalleryData";
 import getPageDetailData from "./middlewares/getPageDetailData";
 import spa from "./spa";
 const router = express.Router();

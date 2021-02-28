@@ -14,11 +14,12 @@ interface MockReq {
 describe("workoutsMiddlewares", () => {
   it("should have static functions defined", () => {
     expect(typeof WM.detail).toBe("function");
-    expect(typeof WM.list).toBe("function");
+    expect(typeof WM.workoutsGallery).toBe("function");
   });
 
   describe("detail", () => {
     let alias: string;
+    // eslint-disable-next-line @typescript-eslint/ban-types
     let req: object;
     let resMock: MockReq;
 
@@ -69,6 +70,7 @@ describe("workoutsMiddlewares", () => {
     const startDate = "2020-02";
     const selectedCategories = "c1,c2";
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     let req: object;
     let resMock: MockReq;
 
@@ -98,7 +100,11 @@ describe("workoutsMiddlewares", () => {
         });
 
       const next: NextFunction = jest.fn();
-      await WM.list(req as Request, (resMock as unknown) as Response, next);
+      await WM.workoutsGallery(
+        req as Request,
+        (resMock as unknown) as Response,
+        next
+      );
       expect(getPageSpy).toBeCalledWith(1, startDate, selectedCategories);
       expect(next).not.toBeCalled();
       expect(resMock.status).toBeCalledWith(200);
@@ -115,7 +121,11 @@ describe("workoutsMiddlewares", () => {
           return Promise.reject("SOME ERROR");
         });
       const next: NextFunction = jest.fn();
-      await WM.list(req as Request, (resMock as unknown) as Response, next);
+      await WM.workoutsGallery(
+        req as Request,
+        (resMock as unknown) as Response,
+        next
+      );
       expect(getPageSpy).toBeCalledWith(1, startDate, selectedCategories);
       expect(next).toBeCalledWith("SOME ERROR");
     });

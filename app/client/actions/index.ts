@@ -2,6 +2,7 @@ import workoutsService from "../services/workoutsServiceClient";
 import { Dispatch } from "redux";
 import { GalleryAction, GalleryState } from "../reducers/galleryReducer";
 import { GalleryItemProps } from "../../components/Gallery/GalleryItem";
+import { OrderedMonthsList } from "../../server/middlewares/utils/monthSelectorList";
 import {
   ItemDetailAction,
   ItemDetailState,
@@ -30,7 +31,7 @@ export const getGalleryPage = (
         selectedCategories: result.selectedCategories as string[],
         totalPages: result.totalPages as number,
         totalWorkOuts: result.totalWorkOuts as number,
-        startDateSelector: result.startDateSelector as Record<string, unknown>,
+        startDateSelector: result.startDateSelector as OrderedMonthsList,
         startDate,
         availableCategories: result.availableCategories as string[],
       })

@@ -1,10 +1,11 @@
 import React, { ReactElement } from "react";
 import { Dropdown, DropdownItemProps } from "semantic-ui-react";
+import { OrderedMonthsList } from "../../server/middlewares/utils/monthSelectorList";
 
 interface TopBarProps {
   startDateChangeHandler(value: string): void;
   categoryChangeHandler(value: string[]): void;
-  startDateSelector?: Record<string, unknown>;
+  startDateSelector?: OrderedMonthsList;
   availableCategories?: string[];
   selectMonthValue?: string;
   selectCategoriesValue?: string[];
@@ -13,7 +14,7 @@ interface TopBarProps {
 const TopBar = ({
   startDateChangeHandler,
   categoryChangeHandler,
-  startDateSelector = {},
+  startDateSelector = { All: "" },
   availableCategories = [],
   selectMonthValue = "",
   selectCategoriesValue = [],
@@ -24,7 +25,9 @@ const TopBar = ({
     const dropdownItem: DropdownItemProps = {
       key,
       text: key,
-      value: startDateSelector[key] as string | number | boolean | undefined,
+      value: ((startDateSelector as unknown) as Record<string, unknown>)[
+        key
+      ] as string | number | boolean | undefined,
     };
     return dropdownItem;
   });
