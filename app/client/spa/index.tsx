@@ -5,7 +5,7 @@ import { ConnectedRouter } from "connected-react-router";
 import View from "../../pages/spa";
 import configureStore, { history } from "./configureStore";
 
-import styles from "../../pages/spa/styles.scss";
+import "../../pages/spa/styles.scss";
 
 declare global {
   interface Window {

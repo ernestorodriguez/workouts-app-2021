@@ -5,13 +5,23 @@ const getPage = (
   startDate?: string,
   selectedCategories?: string[]
 ): Promise<Record<string, unknown>> => {
-  const categoriesString = selectedCategories? selectedCategories.join(",") : "";
-  return fetch(
-    `${workoutsApiPath}?page=${page}&startDate=${startDate}&selectedCategories=${categoriesString}`,
-    {
-      method: "GET",
-    }
-  ).then((result) => result.json());
+
+  let query = "";
+  if (page) {
+    query += `page=${page}&`;
+  }
+
+  if (startDate) {
+    query += `startDate=${startDate}&`;
+  }
+
+  if (selectedCategories) {
+    query += `selectedCategories=${selectedCategories}&`;
+  }
+
+  return fetch(`${workoutsApiPath}?${query}`, {
+    method: "GET",
+  }).then((result) => result.json());
 };
 
 const get = (alias: string): Promise<Record<string, unknown>> =>

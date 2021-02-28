@@ -1,4 +1,5 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const config = require("config");
 
 module.exports = {
@@ -45,6 +46,9 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [{ from: "./app/assets/images", to: "images" }],
+    }),
+    new MiniCssExtractPlugin({
+      filename: "style.[contenthash].css",
     }),
   ],
   resolve: {

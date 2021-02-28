@@ -25,13 +25,13 @@ export default (req: Request, res: Response, next: NextFunction): void => {
       res.locals.pageData = {
         title: siteName,
         gallery: {
-          page: 1,
+          page: pageNumber,
           workouts: response.data,
-          selectedCategories: [],
+          selectedCategories: queryData.selectedCategories,
           totalPages: Math.ceil(response.results / 20),
           totalWorkOuts: response.results,
           startDateSelector: getMonthSelectorList(new Date(Date.now())),
-          startDate: "",
+          startDate: queryData.startDate,
           availableCategories,
         },
       };

@@ -22,12 +22,14 @@ export const getGalleryPage = (
   workoutsService.getPage(page, startDate, selectedCategories).then((result) =>
     dispatch(
       getGallerySuccess({
-        workouts: result.workouts as GalleryItemProps[],
         page,
-        startDate,
+        workouts: result.workouts as GalleryItemProps[],
         selectedCategories,
         totalPages: result.totalPages as number,
         totalWorkOuts: result.totalWorkOuts as number,
+        startDateSelector: result.startDateSelector as Record<string, unknown>,
+        startDate,
+        availableCategories: result.availableCategories as string[],
       })
     )
   );

@@ -5,10 +5,11 @@ import GalleryTopBar from "./GalleryTopBar";
 import { getGalleryPage } from "../../client/actions";
 import GalleryFooter from "./GalleryFooter";
 import { RootState } from "../../client/reducers";
+import { useHistory, useLocation } from "react-router";
 
 const Gallery = (): ReactElement => {
   const children: ReactChild[] = [];
-
+  const history = useHistory();
   const {
     workouts = [],
     page,
@@ -19,7 +20,6 @@ const Gallery = (): ReactElement => {
     totalWorkOuts,
     totalPages,
   } = useSelector(({ gallery }: RootState) => gallery);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
