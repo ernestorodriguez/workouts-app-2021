@@ -19,7 +19,9 @@
     "lib",
     "babel.config.js",
     "webpack.config.js",
-    "config"
+    "config",
+    "test",
+    "cypress"
   ],
 }
 

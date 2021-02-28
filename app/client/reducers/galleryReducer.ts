@@ -24,12 +24,7 @@ const actions = {
   [GET_PAGE_SUCCESS](state: GalleryState, action: GalleryAction) {
     return {
       ...state,
-      page: action.payload.page,
-      workouts: action.payload.workouts,
-      selectedCategories: action.payload.selectedCategories,
-      startDate: action.payload.startDate,
-      totalPages: action.payload.totalPages,
-      totalWorkOuts: action.payload.totalWorkOuts,
+      ...action.payload,
     };
   },
 

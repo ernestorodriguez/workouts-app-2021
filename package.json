@@ -7,8 +7,10 @@
     "build:client": "rm -rf build && webpack --mode development",
     "build:watch": "tsc --watch",
     "start:dev": "NODE_ENV=development nodemon ./dist/app.js",
-    "test:unit": "tsc && NODE_ENV=testing jest --coverage",
-    "test:unit:watch": "npm run test:unit -- --watch"
+    "test:unit": "jest --coverage",
+    "test:unit:watch": "NODE_ENV=testing jest --watch",
+    "test:acceptance": "cypress run --spec **/*.feature",
+    "test:acceptance:watch": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,9 @@
   "bugs": {
     "url": "https://github.com/ernestorodriguez/workouts-app-2021/issues"
   },
+  "cypress-cucumber-preprocessor": {
+    "step_definitions": "tests/acceptance/step_definitions/"
+  },
   "homepage": "https://github.com/ernestorodriguez/workouts-app-2021#readme",
   "dependencies": {
     "config": "^3.3.3",
@@ -26,6 +31,10 @@
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.1.0",
     "css-modules-typescript-loader": "^4.0.1",
+    "cypress": "^6.5.0",
+    "cypress-cucumber-preprocessor": "^4.0.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "express": "^4.17.1",
     "extract-loader": "^5.1.0",
     "file-loader": "^6.2.0",

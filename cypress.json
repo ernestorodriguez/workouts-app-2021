@@ -1,0 +1,8 @@
+{
+  "testFiles": "**/*.{feature,features}",
+  "fileServerFolder": "tests/",
+  "fixturesFolder": false,
+  "integrationFolder": "tests/acceptance/",
+  "pluginsFile": "tests/config/cypress/plugins/index.js",
+  "supportFile": false
+}

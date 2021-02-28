@@ -5,7 +5,6 @@ const getPage = (
   startDate?: string,
   selectedCategories?: string[]
 ): Promise<Record<string, unknown>> => {
-
   let query = "";
   if (page) {
     query += `page=${page}&`;

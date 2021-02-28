@@ -4,8 +4,6 @@ import gallery, { GalleryState } from "./galleryReducer";
 import itemDetail, { ItemDetailState } from "./itemDetailReducer";
 import { History } from "history";
 
-
-
 const createRootReducer = (
   history: History
 ): Reducer<

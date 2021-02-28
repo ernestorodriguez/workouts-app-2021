@@ -18,7 +18,7 @@ export const getGalleryPage = (
   page: number,
   startDate: string | undefined,
   selectedCategories: string[] | undefined
-) => (dispatch: Dispatch) => {
+) => (dispatch: Dispatch): void => {
   workoutsService.getPage(page, startDate, selectedCategories).then((result) =>
     dispatch(
       getGallerySuccess({
