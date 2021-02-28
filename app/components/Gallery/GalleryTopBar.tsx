@@ -6,6 +6,8 @@ interface TopBarProps {
   categoryChangeHandler(value: string[]): void;
   startDateSelector?: Record<string, unknown>;
   availableCategories?: string[];
+  selectMonthValue?: string;
+  selectCategoriesValue?: string[];
 }
 
 const TopBar = ({
@@ -13,6 +15,8 @@ const TopBar = ({
   categoryChangeHandler,
   startDateSelector = {},
   availableCategories = [],
+  selectMonthValue = "",
+  selectCategoriesValue = [],
 }: TopBarProps): ReactElement => {
   const startDateOption: DropdownItemProps[] = Object.keys(
     startDateSelector
@@ -36,6 +40,7 @@ const TopBar = ({
       <Dropdown
         className="gallery-header__dropdown start-date-selector"
         placeholder="Select Month"
+        value={selectMonthValue}
         fluid
         selection
         options={startDateOption}
@@ -46,6 +51,7 @@ const TopBar = ({
       <Dropdown
         className="gallery-header__dropdown category-selector"
         placeholder="Select Categories"
+        value={selectCategoriesValue}
         fluid
         multiple
         selection

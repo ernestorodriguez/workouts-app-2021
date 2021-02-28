@@ -26,10 +26,17 @@ export default class WorkoutsMiddlewares {
     const page: string = req.query.page as string;
     const pageNumber = Number(page);
     const startDate: string = req.query.startDate as string;
-    const selectedCategories: string = req.query.selectedCategories as string;
+    const selectedCategoriesString: string = req.query
+      .selectedCategories as string;
+    let selectedCategories: string[] = [];
+
+    if (selectedCategoriesString) {
+      selectedCategories = selectedCategoriesString.split(",");
+    }
+
     const availableCategories = ["c1", "c2", "c3", "c4", "c5", "c6", "c7"];
     await workoutsService
-      .getPage(pageNumber, startDate, selectedCategories)
+      .getPage(pageNumber, startDate, selectedCategoriesString)
       .then((response) => {
         res.status(200);
         res.json({

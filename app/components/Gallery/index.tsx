@@ -80,6 +80,8 @@ const Gallery = (): ReactElement => {
         categoryChangeHandler={categoryChangeHandler}
         startDateSelector={startDateSelector}
         availableCategories={availableCategories}
+        selectMonthValue={startDate}
+        selectCategoriesValue={selectedCategories}
       />
       <section className="gallery-item-container" data-js="gallery">
         {children}

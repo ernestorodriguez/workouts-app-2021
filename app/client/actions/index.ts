@@ -27,7 +27,7 @@ export const getGalleryPage = (
       getGallerySuccess({
         page,
         workouts: result.workouts as GalleryItemProps[],
-        selectedCategories,
+        selectedCategories: result.selectedCategories as string[],
         totalPages: result.totalPages as number,
         totalWorkOuts: result.totalWorkOuts as number,
         startDateSelector: result.startDateSelector as Record<string, unknown>,

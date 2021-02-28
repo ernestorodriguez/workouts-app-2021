@@ -19,6 +19,11 @@ export default (req: Request, res: Response, next: NextFunction): void => {
     pageNumber = Number(queryData.page);
   }
 
+  let selectedCategories: string[] = [];
+  if (queryData.selectedCategories) {
+    selectedCategories = queryData.selectedCategories.split(",");
+  }
+
   workoutsService
     .getPage(pageNumber, queryData.startDate, queryData.selectedCategories)
     .then((response) => {
@@ -27,7 +32,7 @@ export default (req: Request, res: Response, next: NextFunction): void => {
         gallery: {
           page: pageNumber,
           workouts: response.data,
-          selectedCategories: queryData.selectedCategories,
+          selectedCategories: selectedCategories,
           totalPages: Math.ceil(response.results / 20),
           totalWorkOuts: response.results,
           startDateSelector: getMonthSelectorList(new Date(Date.now())),
