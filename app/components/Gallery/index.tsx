@@ -5,7 +5,8 @@ import GalleryTopBar from "./GalleryTopBar";
 import { getGalleryPage } from "../../client/actions";
 import GalleryFooter from "./GalleryFooter";
 import { RootState } from "../../client/reducers";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
+import { buildParams } from "../../utils";
 
 const Gallery = (): ReactElement => {
   const children: ReactChild[] = [];
@@ -27,6 +28,16 @@ const Gallery = (): ReactElement => {
       dispatch(getGalleryPage(1, startDate, selectedCategories));
     }
   }, []);
+
+  useEffect(() => {
+    const query = buildParams(page, startDate, selectedCategories);
+    history.push({
+      search: query,
+      state: {
+        update: false,
+      },
+    });
+  }, [page, startDate, selectedCategories]);
 
   workouts.forEach(
     ({

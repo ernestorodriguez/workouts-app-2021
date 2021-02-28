@@ -2,8 +2,8 @@ import { Sequelize } from "sequelize";
 import config from "config";
 
 let sqlConnection = {
-  query: (a: any, b: any) => Promise.resolve(),
-  authenticate: () => Promise.resolve(),
+  query: (a: any, b: any): Promise<void> => Promise.resolve(),
+  authenticate: (): Promise<void> => Promise.resolve(),
 };
 
 if (process.env.NODE_ENV !== "testing") {

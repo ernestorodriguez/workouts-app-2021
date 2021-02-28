@@ -1,3 +1,5 @@
+import { buildParams } from "../../utils";
+
 const workoutsApiPath = "/api/workouts";
 
 const getPage = (
@@ -5,19 +7,7 @@ const getPage = (
   startDate?: string,
   selectedCategories?: string[]
 ): Promise<Record<string, unknown>> => {
-  let query = "";
-  if (page) {
-    query += `page=${page}&`;
-  }
-
-  if (startDate) {
-    query += `startDate=${startDate}&`;
-  }
-
-  if (selectedCategories) {
-    query += `selectedCategories=${selectedCategories}&`;
-  }
-
+  const query = buildParams(page, startDate, selectedCategories);
   return fetch(`${workoutsApiPath}?${query}`, {
     method: "GET",
   }).then((result) => result.json());

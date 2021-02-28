@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable quotes */
-
 import { Given, Then } from "cypress-cucumber-preprocessor/steps";
 
 const url = "http://localhost:8080";

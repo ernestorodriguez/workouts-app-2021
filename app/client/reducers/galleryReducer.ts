@@ -39,7 +39,7 @@ const galleryReducer = (
     type: "defaultAction",
     payload: {},
   }
-) => {
+): GalleryState => {
   const performAction = actions[action.type] || actions.defaultAction;
   return performAction(state, action);
 };

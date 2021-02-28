@@ -1,8 +1,11 @@
 import workoutsService from "../services/workoutsServiceClient";
 import { Dispatch } from "redux";
 import { GalleryAction, GalleryState } from "../reducers/galleryReducer";
-import { ItemDetailState } from "../reducers/itemDetailReducer";
 import { GalleryItemProps } from "../../components/Gallery/GalleryItem";
+import {
+  ItemDetailAction,
+  ItemDetailState,
+} from "../reducers/itemDetailReducer";
 
 export const galleryActions = {
   GET_PAGE: "GET_PAGE",
@@ -40,12 +43,12 @@ export const itemActions = {
   GET_ITEM_SUCCESS: "GET_ITEM_SUCCESS",
 };
 
-export const getItemSuccess = (payload: ItemDetailState) => ({
+export const getItemSuccess = (payload: ItemDetailState): ItemDetailAction => ({
   type: itemActions.GET_ITEM_SUCCESS,
   payload,
 });
 
-export const getItem = (alias: string) => (dispatch: Dispatch) => {
+export const getItem = (alias: string) => (dispatch: Dispatch): void => {
   workoutsService
     .get(alias)
     .then((result) =>

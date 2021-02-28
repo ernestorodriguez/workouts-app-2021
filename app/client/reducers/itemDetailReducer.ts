@@ -30,7 +30,7 @@ const actions = {
 const itemDetailReducer = (
   state: ItemDetailState = {},
   action: ItemDetailAction = { type: "defaultAction" }
-) => {
+): ItemDetailState => {
   const performAction = actions[action.type] || actions.defaultAction;
   return performAction(state, action);
 };
