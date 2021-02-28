@@ -5,12 +5,14 @@ import GalleryTopBar from "./GalleryTopBar";
 import { getGalleryPage } from "../../client/actions";
 import GalleryFooter from "./GalleryFooter";
 import { RootState } from "../../client/reducers";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { buildParams } from "../../utils";
 
 const Gallery = (): ReactElement => {
   const children: ReactChild[] = [];
   const history = useHistory();
+  const location = useLocation();
+
   const {
     workouts = [],
     page,
@@ -25,7 +27,21 @@ const Gallery = (): ReactElement => {
 
   useEffect(() => {
     if (workouts && workouts.length === 0) {
-      dispatch(getGalleryPage(1, startDate, selectedCategories));
+      const params = new URLSearchParams(location.search);
+
+      let newPage = 1;
+      let newStartDate = startDate;
+      let newSelectedCategories = selectedCategories;
+      if (params.has("page")) {
+        newPage = (params.get("page") as unknown) as number;
+      }
+      if (params.has("startDate")) {
+        newStartDate = params.get("startDate") as string;
+      }
+      if (params.has("selectedCategories")) {
+        newSelectedCategories = params.get("selectedCategories")?.split(",");
+      }
+      dispatch(getGalleryPage(newPage, newStartDate, newSelectedCategories));
     }
   }, []);
 

@@ -43,7 +43,7 @@ const months = [
   "December",
 ];
 
-Given("I open workaouts main page", () => {
+Given("I open workouts main page", () => {
   cy.visit(url);
 });
 
@@ -113,6 +113,7 @@ Then(
   `The startDate filter will show all months from today till the next 12 months`,
   () => {
     cy.get(selectors.filterStartDate)
+      .focus()
       .find(".item")
       .then((options) => {
         const optionsList = [...options];
@@ -126,30 +127,40 @@ Then(
 
 Then(`The category filter should be multiple-choice`, () => {
   cy.get(selectors.filterCategory)
-    .find(".item")
+    .focus()
+    .find(".ui.label")
     .then((options) => {
       const optionsList = [...options];
-      expect(optionsList.length).to.equal(7);
+      expect(optionsList.length).to.equal(2);
       optionsList.forEach((o) => {
-        expect(["c1", "c2", "c3", "c4", "c5", "c6", "c7"]).to.contains(
-          o.innerText
-        );
+        expect(["c1", "c7"]).to.contains(o.getAttribute("value"));
       });
     });
 });
 
-When(`c1 and c7 are selected the list`, () => {
+When(`c1 and c7 are selected in the list`, () => {
   cy.get(selectors.filterCategory)
     .find(".item")
     .then((options) => {
       const optionsList = [...options];
-      expect(optionsList.length).to.equal(7);
       optionsList.forEach((o) => {
-        if (o.innerText === "c1" || o.innerText === "c7") {
-          expect(["c1", "c7"]).to.contains(o.innerText);
+        if (o.innerText === "c7" || o.innerText === "c1") {
+          o.click();
         }
       });
     });
+  cy.wait(200);
+  cy.get(selectors.filterCategory)
+    .find(".item")
+    .then((options) => {
+      const optionsList = [...options];
+      optionsList.forEach((o) => {
+        if (o.innerText === "c1") {
+          o.click();
+        }
+      });
+    });
+  cy.wait(200);
 });
 
 Then(`It should show only workouts where startDate month matches`, () => {
@@ -176,28 +187,25 @@ Then(`It should show only workouts where startDate month matches`, () => {
 });
 
 Then(
-  `should be filtered and show workouts that have category either c1 or c7`,
+  `should be filtered and show workouts that have category c1 and c7`,
   () => {
-    cy.get(selectors.filterCategory)
-      .find(".item")
-      .then((options) => {
-        const optionsList = [...options];
-        expect(optionsList.length).to.equal(7);
-        optionsList.forEach((o) => {
-          if (o.innerText === "c1" || o.innerText === "c7") {
-            o.click();
-          }
-        });
-      });
-    cy.wait(200);
+    let c1Included = false;
+    let c7Included = false
     cy.get(selectors["workout item"])
       .find('[data-js="start-category"]')
-      .then((dates) => {
-        const datesList = [...dates];
-        expect(datesList.length).to.equal(20);
-        datesList.forEach((o) => {
+      .then((options) => {
+        const workoutsList = [...options];
+        workoutsList.forEach((o) => {
           expect(["c1", "c7"]).to.contains(o.innerText);
+          if (o.innerText === "c7") {
+            c7Included = true;
+          }
+          if (o.innerText === "c1") {
+            c1Included = true;
+          }
         });
+        expect(c1Included).to.be.true;
+        expect(c7Included).to.be.true;
       });
   }
 );
@@ -236,10 +244,11 @@ Then(`and pages in between`, () => {
     .should("have.attr", "value", "2");
 });
 
-Then(`It should hidewhen results are less than page size (20)`, () => {
-  cy.get(selectors.filterStartDate).click();
+Then(`It should hide when results are less than page size (20)`, () => {
+  cy.get(selectors.filterCategory).focus();
   cy.wait(200);
   cy.get(selectors.filterCategory)
+    .focus()
     .find('.ui.label[value="c7"] .delete')
     .click();
   cy.wait(200);
@@ -251,7 +260,6 @@ Then(`It should hidewhen results are less than page size (20)`, () => {
     .find(".item")
     .then((options) => {
       const optionsList = [...options];
-      expect(optionsList.length).to.equal(6);
       optionsList.forEach((o) => {
         if (o.innerText === "c3") {
           o.click();
@@ -260,4 +268,8 @@ Then(`It should hidewhen results are less than page size (20)`, () => {
     });
   cy.wait(200);
   cy.get(selectors.paginationBar).should("not.be.exist");
+});
+
+Then("I refresh the page", () => {
+  cy.reload();
 });

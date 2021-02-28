@@ -4,7 +4,7 @@ Feature: Workouts Page
 
   @focus
   Scenario: Workouts Page
-    Given I open workaouts main page
+    Given I open workouts main page
     Then I see "Awesome workouts" in the title
     And I can see a "global header" with "an image logo"
     And I can see a "top bar" with two filters: StartDate and Category
@@ -19,15 +19,29 @@ Feature: Workouts Page
     Then I can come back to the Workout List Page from the Workout Detail Page
 
   @focus
-  Scenario: Fliltering result
-    Given I open workaouts main page
+  Scenario: Filtering result
+    Given I open workouts main page
     Then The startDate filter will show all months from today till the next 12 months
     And It should show only workouts where startDate month matches
-    And The category filter should be multiple-choice
-    When c1 and c7 are selected the list
-    Then should be filtered and show workouts that have category either c1 or c7
+    When c1 and c7 are selected in the list
+    Then The category filter should be multiple-choice
+    And should be filtered and show workouts that have category c1 and c7
     And at the end of a list, there should be a pagination bar
     And should indicate the total amount of workouts
     And page number
     And and pages in between
-    And It should hidewhen results are less than page size 20
+    And It should hide when results are less than page size 20
+
+  @focus
+  Scenario: Refresh and serverside rendering
+    Given I open workouts main page
+    Then It should show only workouts where startDate month matches
+    When c1 and c7 are selected in the list
+    Then I refresh the page
+    And should be filtered and show workouts that have category c1 and c7
+    And It should show only workouts where startDate month matches
+    When I click on one "workout item"
+    Then I refresh the page
+    Then I can come back to the Workout List Page from the Workout Detail Page
+    And should be filtered and show workouts that have category c1 and c7
+    And It should show only workouts where startDate month matches
