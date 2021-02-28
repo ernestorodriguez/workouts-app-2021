@@ -226,7 +226,7 @@ Then(`at the end of a list, there should be a pagination bar`, () => {
 
 Then(`should indicate the total amount of workouts`, () => {
   cy.get(selectors.totalWorkouts).should("be.visible");
-  cy.get(selectors.totalWorkouts).should("have.contain", "23");
+  cy.get(selectors.totalWorkouts).should("have.contain", "32");
 });
 
 Then(`page number`, () => {
