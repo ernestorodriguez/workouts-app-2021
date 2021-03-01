@@ -7,6 +7,7 @@ export interface ItemDetailState {
   startDate?: string;
   category?: string;
   description?: string;
+  thumbnailHigh?: string;
 }
 
 export interface ItemDetailAction {

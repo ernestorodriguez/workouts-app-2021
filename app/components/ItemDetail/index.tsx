@@ -9,15 +9,13 @@ interface ItemDetailProps {
 }
 
 const ItemDetail = ({ alias }: ItemDetailProps): ReactElement => {
-  const { name, startDate, category, description } = useSelector(
+  const { name, startDate, category, description, thumbnailHigh } = useSelector(
     ({ itemDetail }: RootState) => itemDetail
   );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!name) {
-      dispatch(getItem(alias));
-    }
+    dispatch(getItem(alias));
   }, []);
 
   return (
@@ -32,6 +30,7 @@ const ItemDetail = ({ alias }: ItemDetailProps): ReactElement => {
       <div className="item-detail__badge" data-js="category">
         {category}
       </div>
+      <img className="item-image" src={thumbnailHigh} />
       <article data-js="description">{description}</article>
     </section>
   );

@@ -190,7 +190,7 @@ Then(
   `should be filtered and show workouts that have category c1 and c7`,
   () => {
     let c1Included = false;
-    let c7Included = false
+    let c7Included = false;
     cy.get(selectors["workout item"])
       .find('[data-js="start-category"]')
       .then((options) => {
