@@ -1,6 +1,6 @@
 import { itemActions } from "../actions";
 
-const { GET_ITEM_SUCCESS } = itemActions;
+const { GET_ITEM_SUCCESS, GET_ITEM, GET_ITEM_FETCHING } = itemActions;
 
 export interface ItemDetailState {
   name?: string;
@@ -16,7 +16,10 @@ export interface ItemDetailAction {
 }
 
 const actions = {
-  // TODO ADD LOADING STATE
+  [GET_ITEM_FETCHING](state: ItemDetailState) {
+    return {};
+  },
+
   [GET_ITEM_SUCCESS](state: ItemDetailState, action: ItemDetailAction) {
     return {
       ...state,

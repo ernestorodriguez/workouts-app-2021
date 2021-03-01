@@ -41,13 +41,14 @@ const Gallery = (): ReactElement => {
       if (params.has("selectedCategories")) {
         newSelectedCategories = params.get("selectedCategories")?.split(",");
       }
+
       dispatch(getGalleryPage(newPage, newStartDate, newSelectedCategories));
     }
   }, []);
 
   useEffect(() => {
     const query = buildParams(page, startDate, selectedCategories);
-    history.push({
+    history.replace({
       search: query,
       state: {
         update: false,

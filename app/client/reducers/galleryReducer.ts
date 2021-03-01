@@ -2,7 +2,7 @@ import { galleryActions } from "../actions";
 import { GalleryItemProps } from "../../components/Gallery/GalleryItem";
 import { OrderedMonthsList } from "../../server/middlewares/utils/monthSelectorList";
 
-const { GET_PAGE_SUCCESS } = galleryActions;
+const { GET_PAGE_SUCCESS, GET_PAGE_FETCHING } = galleryActions;
 
 export interface GalleryState {
   workouts?: GalleryItemProps[];
@@ -21,7 +21,9 @@ export interface GalleryAction {
 }
 
 const actions = {
-  // TODO ADD LOADING STATE
+  [GET_PAGE_FETCHING](state: GalleryState) {
+    return state;
+  },
   [GET_PAGE_SUCCESS](state: GalleryState, action: GalleryAction) {
     return {
       ...state,

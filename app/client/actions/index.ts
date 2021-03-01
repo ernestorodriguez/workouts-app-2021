@@ -9,7 +9,7 @@ import {
 } from "../reducers/itemDetailReducer";
 
 export const galleryActions = {
-  GET_PAGE: "GET_PAGE",
+  GET_PAGE_FETCHING: "GET_PAGE_FETCHING",
   GET_PAGE_SUCCESS: "GET_PAGE_SUCCESS",
 };
 
@@ -18,12 +18,36 @@ export const getGallerySuccess = (payload: GalleryState): GalleryAction => ({
   payload,
 });
 
+export const galleryFetching = (payload: GalleryState): GalleryAction => ({
+  type: galleryActions.GET_PAGE_FETCHING,
+  payload,
+});
+
+const fetchGalleryData = (
+  page: number,
+  startDate: string | undefined,
+  selectedCategories: string[] | undefined
+): Promise<Record<string, unknown>> => {
+  return workoutsService.getPage(page, startDate, selectedCategories);
+};
+
 export const getGalleryPage = (
   page: number,
   startDate: string | undefined,
   selectedCategories: string[] | undefined
-) => (dispatch: Dispatch): void => {
-  workoutsService.getPage(page, startDate, selectedCategories).then((result) =>
+) => (dispatch: Dispatch, getState: any): void => {
+  const { gallery } = getState();
+  if (
+    page === gallery.page &&
+    startDate === gallery.startDate &&
+    selectedCategories === gallery.selectedCategories
+  ) {
+    dispatch(getGallerySuccess({}));
+    return;
+  }
+
+  dispatch(galleryFetching({}));
+  fetchGalleryData(page, startDate, selectedCategories).then((result) =>
     dispatch(
       getGallerySuccess({
         page,
@@ -39,9 +63,11 @@ export const getGalleryPage = (
   );
 };
 
+//ITEM TODO MOVE TO ANOTHER FILE
 export const itemActions = {
   GET_ITEM: "GET_ITEM",
   GET_ITEM_SUCCESS: "GET_ITEM_SUCCESS",
+  GET_ITEM_FETCHING: "GET_ITEM_FETCHING",
 };
 
 export const getItemSuccess = (payload: ItemDetailState): ItemDetailAction => ({
@@ -49,10 +75,26 @@ export const getItemSuccess = (payload: ItemDetailState): ItemDetailAction => ({
   payload,
 });
 
-export const getItem = (alias: string) => (dispatch: Dispatch): void => {
-  workoutsService
-    .get(alias)
-    .then((result) =>
-      dispatch(getItemSuccess(result.itemDetail as ItemDetailState))
-    );
+export const fetchingItem = (payload: ItemDetailState): ItemDetailAction => ({
+  type: itemActions.GET_ITEM_SUCCESS,
+  payload,
+});
+
+const fetchItem = (alias: string): Promise<Record<string, unknown>> => {
+  return workoutsService.get(alias);
+};
+
+export const getItem = (alias: string) => (
+  dispatch: Dispatch,
+  getState: any
+): void => {
+  const { itemDetail } = getState();
+  if (itemDetail.alias === alias) {
+    dispatch(getItemSuccess({}));
+    return;
+  }
+  dispatch(fetchingItem({}));
+  fetchItem(alias).then((result) =>
+    dispatch(getItemSuccess(result.itemDetail as ItemDetailState))
+  );
 };
