@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/ernestorodriguez/workouts-app-2021#readme",
   "dependencies": {
+    "cache-manager": "^3.4.0",
     "config": "^3.3.3",
     "connected-react-router": "^6.9.1",
     "copy-webpack-plugin": "^7.0.0",
@@ -37,6 +38,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "express": "^4.17.1",
+    "express-cache-middleware": "^1.0.1",
     "extract-loader": "^5.1.0",
     "file-loader": "^6.2.0",
     "history": "4.10.1",
