@@ -1,4 +1,4 @@
-import { itemActions } from "../actions";
+import {itemActions} from "../actions/item";
 
 const { GET_ITEM_SUCCESS, GET_ITEM, GET_ITEM_FETCHING } = itemActions;
 

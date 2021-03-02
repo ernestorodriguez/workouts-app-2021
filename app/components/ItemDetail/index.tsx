@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { getItem } from "../../client/actions";
 import { RootState } from "../../client/reducers";
+import { getItem } from "../../client/actions/item";
 
 interface ItemDetailProps {
   alias: string;

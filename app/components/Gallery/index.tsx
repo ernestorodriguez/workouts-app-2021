@@ -2,7 +2,7 @@ import React, { ReactChild, ReactElement, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import GalleryItem, { GalleryItemProps } from "./GalleryItem";
 import GalleryTopBar from "./GalleryTopBar";
-import { getGalleryPage } from "../../client/actions";
+import { getGalleryPage } from "../../client/actions/gallery";
 import GalleryFooter from "./GalleryFooter";
 import { RootState } from "../../client/reducers";
 import { useHistory, useLocation } from "react-router";

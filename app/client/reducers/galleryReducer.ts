@@ -1,4 +1,4 @@
-import { galleryActions } from "../actions";
+import { galleryActions } from "../actions/gallery";
 import { GalleryItemProps } from "../../components/Gallery/GalleryItem";
 import { OrderedMonthsList } from "../../server/middlewares/utils/monthSelectorList";
 
