@@ -1,6 +1,8 @@
 import WM from "./workoutsMiddlewares";
 jest.mock("../../lib/services/workoutsService");
+jest.mock("../../lib/services/galleryService");
 import workoutsService from "../../lib/services/workoutsService";
+import * as galleryServiceModule from "../../lib/services/galleryService";
 import { NextFunction, Request, Response } from "express";
 
 let getSpy: jest.SpyInstance;
@@ -93,10 +95,17 @@ describe("workoutsMiddlewares", () => {
     });
 
     it("should call workoutsService.getPage", async () => {
+
       getPageSpy = jest
-        .spyOn(workoutsService, "getPage")
+        .spyOn(galleryServiceModule, "default")
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         .mockImplementation(() => {
-          return Promise.resolve({ data: {}, results: 20 });
+          return Promise.resolve({
+            totalPages: 1,
+            totalWorkOuts: 20,
+            workouts: {},
+          });
         });
 
       const next: NextFunction = jest.fn();
@@ -105,7 +114,11 @@ describe("workoutsMiddlewares", () => {
         (resMock as unknown) as Response,
         next
       );
-      expect(getPageSpy).toBeCalledWith(1, startDate, selectedCategories);
+      expect(getPageSpy).toBeCalledWith({
+        page: "1",
+        selectedCategories: "c1,c2",
+        startDate: "2020-02",
+      });
       expect(next).not.toBeCalled();
       expect(resMock.status).toBeCalledWith(200);
       expect(resMock.json).toBeCalledWith({
@@ -114,9 +127,10 @@ describe("workoutsMiddlewares", () => {
         workouts: {},
       });
     });
+
     it("should call next if workoutsService.getPage have and error", async () => {
       getPageSpy = jest
-        .spyOn(workoutsService, "getPage")
+        .spyOn(galleryServiceModule, "default")
         .mockImplementation(() => {
           return Promise.reject("SOME ERROR");
         });
@@ -126,7 +140,11 @@ describe("workoutsMiddlewares", () => {
         (resMock as unknown) as Response,
         next
       );
-      expect(getPageSpy).toBeCalledWith(1, startDate, selectedCategories);
+      expect(getPageSpy).toBeCalledWith({
+        page: "1",
+        selectedCategories: "c1,c2",
+        startDate: "2020-02",
+      });
       expect(next).toBeCalledWith("SOME ERROR");
     });
   });

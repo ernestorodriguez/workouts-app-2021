@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { Dropdown, DropdownItemProps } from "semantic-ui-react";
 import { OrderedMonthsList } from "../../server/middlewares/utils/monthSelectorList";
 
-interface TopBarProps {
+export interface TopBarProps {
   startDateChangeHandler(value: string): void;
   categoryChangeHandler(value: string[]): void;
   startDateSelector?: OrderedMonthsList;

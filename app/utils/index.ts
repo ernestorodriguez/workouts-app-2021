@@ -1,11 +1,11 @@
-function addPage(page: number | undefined, query: string): string {
+function addPage(query: string, page: number | undefined): string {
   if (page) {
     query += `page=${page}&`;
   }
   return query;
 }
 
-function addStartDate(startDate: string | undefined, query: string): string {
+function addStartDate(query: string, startDate: string | undefined): string {
   if (startDate) {
     query += `startDate=${startDate}&`;
   }
@@ -13,8 +13,8 @@ function addStartDate(startDate: string | undefined, query: string): string {
 }
 
 function addSelectedCategories(
-  selectedCategories: string[] | undefined,
-  query: string
+  query: string,
+  selectedCategories: string[] | undefined
 ): string {
   if (selectedCategories) {
     query += `selectedCategories=${selectedCategories}&`;
@@ -28,8 +28,8 @@ export function buildParams(
   selectedCategories: string[] | undefined
 ): string {
   let query = "";
-  query = addPage(page, query);
-  query = addStartDate(startDate, query);
-  query = addSelectedCategories(selectedCategories, query);
+  query = addPage(query, page);
+  query = addStartDate(query, startDate);
+  query = addSelectedCategories(query, selectedCategories);
   return query;
 }

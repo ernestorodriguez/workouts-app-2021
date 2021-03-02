@@ -7,6 +7,28 @@ import GalleryFooter from "./GalleryFooter";
 import { RootState } from "../../client/reducers";
 import { useHistory, useLocation } from "react-router";
 import { buildParams } from "../../utils";
+import { History } from "history";
+import LocationState = History.LocationState;
+
+function getQueryParams(
+  params: URLSearchParams,
+  startDate: string | undefined,
+  selectedCategories: string[] | undefined
+) {
+  let newPage = 1;
+  let newStartDate = startDate;
+  let newSelectedCategories = selectedCategories;
+  if (params.has("page")) {
+    newPage = (params.get("page") as unknown) as number;
+  }
+  if (params.has("startDate")) {
+    newStartDate = params.get("startDate") as string;
+  }
+  if (params.has("selectedCategories")) {
+    newSelectedCategories = params.get("selectedCategories")?.split(",");
+  }
+  return { newPage, newStartDate, newSelectedCategories};
+}
 
 const Gallery = (): ReactElement => {
   const children: ReactChild[] = [];
@@ -28,20 +50,11 @@ const Gallery = (): ReactElement => {
   useEffect(() => {
     if (workouts && workouts.length === 0) {
       const params = new URLSearchParams(location.search);
-
-      let newPage = 1;
-      let newStartDate = startDate;
-      let newSelectedCategories = selectedCategories;
-      if (params.has("page")) {
-        newPage = (params.get("page") as unknown) as number;
-      }
-      if (params.has("startDate")) {
-        newStartDate = params.get("startDate") as string;
-      }
-      if (params.has("selectedCategories")) {
-        newSelectedCategories = params.get("selectedCategories")?.split(",");
-      }
-
+      const { newPage, newStartDate, newSelectedCategories } = getQueryParams(
+        params,
+        startDate,
+        selectedCategories
+      );
       dispatch(getGalleryPage(newPage, newStartDate, newSelectedCategories));
     }
   }, []);

@@ -8,8 +8,8 @@
     "build:client:watch": "rm -rf build && webpack --watch --mode development",
     "build:watch": "tsc --watch",
     "start:dev": "NODE_ENV=development nodemon ./dist/app.js",
-    "test:unit": "jest --coverage",
-    "test:unit:watch": "NODE_ENV=testing jest --watch",
+    "test:unit": "NODE_ENV=testing jest --coverage",
+    "test:unit:watch": "npm run test:unit -- --watch",
     "test:acceptance": "cypress run --spec **/*.feature",
     "test:acceptance:watch": "cypress open"
   },
@@ -26,6 +26,17 @@
     "step_definitions": "tests/acceptance/step_definitions/"
   },
   "homepage": "https://github.com/ernestorodriguez/workouts-app-2021#readme",
+  "jest": {
+    "setupFiles": [
+      "./tests/config/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests",
+      "<rootDir>/cypress",
+      "<rootDir>/dist",
+      "<rootDir>/build"
+    ]
+  },
   "dependencies": {
     "cache-manager": "^3.4.0",
     "config": "^3.3.3",

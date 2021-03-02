@@ -23,7 +23,7 @@ export default class WorkoutsMiddlewares {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    galleryService(req.query)
+    await galleryService(req.query)
       .then((response) => {
         res.status(200);
         res.json(response);
