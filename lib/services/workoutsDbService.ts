@@ -1,12 +1,12 @@
 import sequelize from "sequelize";
-import sql from "./mySqlConnection";
+import { getSqlConnection } from "./mySqlConnection";
 
 function querySelect(
   selection: string,
   queryCondition: string
   // eslint-disable-next-line @typescript-eslint/ban-types
 ): Promise<object> {
-  return sql
+  return getSqlConnection()
     .query(`${selection}${queryCondition}`, {
       type: sequelize.QueryTypes.SELECT,
     })
@@ -123,7 +123,7 @@ const getByColumn = (
     replacements,
     columns
   )} FROM ${table} WHERE ${table}.${column} = '${value}'`;
-  return sql.query(query, {
+  return getSqlConnection().query(query, {
     type: sequelize.QueryTypes.SELECT,
   });
 };

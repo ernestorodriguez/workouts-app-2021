@@ -6,7 +6,7 @@ let sqlConnection = {
   authenticate: (): Promise<void> => Promise.resolve(),
 };
 
-if (process.env.NODE_ENV !== "testing") {
+export function unitDB(): void {
   const {
     name: dbName,
     user: dbUser,
@@ -18,10 +18,14 @@ if (process.env.NODE_ENV !== "testing") {
     host: dbHost,
     dialect: "mysql",
   });
+
+  sqlConnection
+    .authenticate()
+    .catch((error) =>
+      console.error("Unable to connect to the database:", error)
+    );
 }
 
-sqlConnection
-  .authenticate()
-  .catch((error) => console.error("Unable to connect to the database:", error));
-
-export default sqlConnection;
+export function getSqlConnection() {
+  return sqlConnection;
+}
