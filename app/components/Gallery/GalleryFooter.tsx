@@ -23,7 +23,7 @@ const GalleryFooter = ({
           activePage={page}
           firstItem={null}
           lastItem={null}
-          boundaryRange={1}
+          boundaryRange={0}
           siblingRange={1}
           pointing
           secondary

@@ -20,11 +20,15 @@ const GalleryItem = ({
 }: GalleryItemProps): ReactElement => (
   <article className="gallery-item" data-js="gallery-item" data-id={id}>
     <NavLink className="gallery-item_link" exact to={`/workouts/${alias}`}>
-      <img className="gallery-item__image" src={thumbnailMedium} alt="" />
+      <div className="gallery-item__image-container">
+        <img className="gallery-item__image" src={thumbnailMedium} alt="" />
+      </div>
       <div className="gallery-item_info">
         <div className="gallery-item_info-name">{name}</div>
         <div data-js="start-date">{startDate}</div>
-        <div data-js="start-category">{category}</div>
+        <div className="gallery-item__category" data-js="start-category">
+          {category}
+        </div>
       </div>
     </NavLink>
   </article>

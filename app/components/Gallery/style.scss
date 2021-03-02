@@ -1,16 +1,37 @@
 .gallery-item {
-  overflow: hidden;
   position: relative;
+  padding: 10px;
 }
 
 .gallery-item_link {
   text-decoration: none;
+  position: relative;
+  display: block;
+}
+
+.gallery-item__image-container {
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .gallery-item__image {
   width: 100%;
   height: auto;
+  transform: scale(1.05);
 }
+
+.gallery-item__category {
+  background-color: lighten($color: #ff7f66, $amount: 5);
+  padding: 5px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  overflow: hidden;
+  color: white;
+  font-weight: 400;
+  text-shadow: none;
+  margin-top: 10px;
+}
+
 
 .gallery-item_info {
   position: absolute;
