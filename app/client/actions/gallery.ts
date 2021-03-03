@@ -47,14 +47,14 @@ export const getGalleryPage = (
   fetchGalleryData(page, startDate, selectedCategories).then((result) =>
     dispatch(
       getGallerySuccess({
-        page,
         workouts: result.workouts as GalleryItemProps[],
         selectedCategories: result.selectedCategories as string[],
         totalPages: result.totalPages as number,
         totalWorkOuts: result.totalWorkOuts as number,
         startDateSelector: result.startDateSelector as OrderedMonthsList,
-        startDate,
         availableCategories: result.availableCategories as string[],
+        startDate,
+        page,
       })
     )
   );

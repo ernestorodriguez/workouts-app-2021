@@ -10,7 +10,7 @@ export default class WorkoutsMiddlewares {
   ): Promise<void> {
     const { alias } = req.params;
     await workoutsService
-      .get("alias", alias)
+      .getItem("alias", alias)
       .then((response: Record<string, unknown>) => {
         res.status(200);
         res.json({ itemDetail: response });

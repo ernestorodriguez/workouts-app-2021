@@ -72,8 +72,8 @@ const getWorkoutByColumnValue = (
 };
 
 const workoutsService = {
-  getPage: getWorkouts,
-  get: getWorkoutByColumnValue,
+  getItemList: getWorkouts,
+  getItem: getWorkoutByColumnValue,
 };
 
 export default workoutsService;

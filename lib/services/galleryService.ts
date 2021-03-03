@@ -9,7 +9,7 @@ async function getGalleryData(
   startDate?: string,
   selectedCategoriesString?: string
 ): Promise<GalleryState> {
-  const response = await workoutsService.getPage(
+  const response = await workoutsService.getItemList(
     page,
     startDate,
     selectedCategoriesString
@@ -19,6 +19,7 @@ async function getGalleryData(
   if (selectedCategoriesString) {
     selectedCategories = selectedCategoriesString.split(",");
   }
+
   return {
     page: page,
     workouts: response.data,
@@ -31,12 +32,18 @@ async function getGalleryData(
   };
 }
 
-function galleryService(query: Record<string, unknown>): Promise<GalleryState> {
-  const page = (query.page as unknown) as number;
-  const startDate: string = query.startDate as string;
-  const selectedCategoriesString: string = query.selectedCategories as string;
+export interface GalleryQuery {
+  page?: number;
+  startDate?: string;
+  selectedCategories?: string;
+}
 
-  return getGalleryData(page, startDate, selectedCategoriesString);
+function galleryService({
+  page,
+  startDate,
+  selectedCategories,
+}: GalleryQuery): Promise<GalleryState> {
+  return getGalleryData(page, startDate, selectedCategories);
 }
 
 export default galleryService;

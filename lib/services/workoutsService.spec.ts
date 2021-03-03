@@ -4,12 +4,12 @@ jest.mock("../../lib/services/workoutsDbService");
 import * as workoutsDbService from "../../lib/services/workoutsDbService";
 
 describe("workoutsService", () => {
-  it("should have getPage and get functions defined", () => {
-    expect(typeof WS.getPage).toBe("function");
-    expect(typeof WS.get).toBe("function");
+  it("should have getPage and getItem functions defined", () => {
+    expect(typeof WS.getItemList).toBe("function");
+    expect(typeof WS.getItem).toBe("function");
   });
 
-  describe("#get", () => {
+  describe("#getItem", () => {
     it("should call workoutsDbService.getByColumn with valid params", async () => {
       const getByColumnSpy: jest.SpyInstance = jest
         .spyOn(workoutsDbService, "getByColumn")
@@ -19,7 +19,7 @@ describe("workoutsService", () => {
           return Promise.resolve(["response"]);
         });
 
-      const response = await WS.get("column", "value");
+      const response = await WS.getItem("column", "value");
 
       expect(response).toEqual("response");
       expect(getByColumnSpy).toBeCalledWith(
@@ -91,14 +91,14 @@ describe("workoutsService", () => {
       getSpy.mockClear();
     });
 
-    it("should call workoutsDbService.get with valid params", async () => {
-      const response = await WS.getPage(1, "2021-02", "c1,c3,4");
+    it("should call workoutsDbService.getItem with valid params", async () => {
+      const response = await WS.getItemList(1, "2021-02", "c1,c3,4");
       expect(response).toEqual("response");
       expect(getSpy).toBeCalledWith(expectedResponse);
     });
 
     it("should have minimum page of 1", async () => {
-      const response = await WS.getPage(-1, "2021-02", "c1,c3,4");
+      const response = await WS.getItemList(-1, "2021-02", "c1,c3,4");
       expect(response).toEqual("response");
       expect(getSpy).toBeCalledWith(expectedResponse);
     });

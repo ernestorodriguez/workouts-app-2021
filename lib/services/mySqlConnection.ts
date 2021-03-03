@@ -1,10 +1,7 @@
 import { Sequelize } from "sequelize";
 import config from "config";
 
-let sqlConnection = {
-  query: (a: any, b: any): Promise<void> => Promise.resolve(),
-  authenticate: (): Promise<void> => Promise.resolve(),
-};
+let sqlConnection: Sequelize;
 
 export function unitDB(): void {
   const {
@@ -27,5 +24,8 @@ export function unitDB(): void {
 }
 
 export function getSqlConnection() {
+  if (!sqlConnection) {
+    throw new Error("Must initialize the DB first, call unitDB()");
+  }
   return sqlConnection;
 }

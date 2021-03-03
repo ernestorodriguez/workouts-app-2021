@@ -43,8 +43,8 @@ describe("workoutsMiddlewares", () => {
       getSpy.mockClear();
     });
 
-    it("should call workoutsService.get", async () => {
-      getSpy = jest.spyOn(workoutsService, "get").mockImplementation(() => {
+    it("should call workoutsService.getItem", async () => {
+      getSpy = jest.spyOn(workoutsService, "getItem").mockImplementation(() => {
         return Promise.resolve({});
       });
 
@@ -56,8 +56,8 @@ describe("workoutsMiddlewares", () => {
       expect(resMock.json).toBeCalledWith({ itemDetail: {} });
     });
 
-    it("should call next if workoutsService.get have and error", async () => {
-      getSpy = jest.spyOn(workoutsService, "get").mockImplementation(() => {
+    it("should call next if workoutsService.getItem have and error", async () => {
+      getSpy = jest.spyOn(workoutsService, "getItem").mockImplementation(() => {
         return Promise.reject("SOME ERROR");
       });
 

@@ -6,7 +6,7 @@ const { name: siteName } = config.get("site");
 
 export default (req: Request, res: Response, next: NextFunction): void => {
   workoutsService
-    .get("alias", req.params.alias)
+    .getItem("alias", req.params.alias)
     .then((response) => {
       res.locals.pageData = {
         title: siteName,

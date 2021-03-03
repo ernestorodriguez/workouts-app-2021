@@ -3,6 +3,12 @@ import { unitDB, getSqlConnection } from "./mySqlConnection";
 import sequelize from "sequelize";
 
 describe("mySqlConnection", () => {
+  it("Should trigger Error if getSqlConnection is called before unitDB", () => {
+    expect(getSqlConnection).toThrow(
+      "Must initialize the DB first, call unitDB()"
+    );
+  });
+
   it("initDB method should initialize db", () => {
     const sequelizeMock = {
       authenticate: jest.fn(() => {

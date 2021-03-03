@@ -27,7 +27,7 @@ describe("workoutsDbService", () => {
       });
   });
 
-  it("should have getPage and get functions defined", () => {
+  it("should have getPage and getItem functions defined", () => {
     expect(typeof WDBS.getByColumn).toBe("function");
     expect(typeof WDBS.get).toBe("function");
   });
@@ -54,7 +54,7 @@ describe("workoutsDbService", () => {
       );
     });
   });
-  describe("#get", () => {
+  describe("#getItem", () => {
     const queryResult = "queryResult";
     const sqlResponse = [{ "COUNT(*)": queryResult }];
 
