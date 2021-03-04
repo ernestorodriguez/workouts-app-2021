@@ -8,6 +8,7 @@ const renderSPA = (req: Request, res: Response, next: NextFunction) => {
   const { pageData } = res.locals;
   if (!pageData) {
     next();
+    return;
   }
 
   const config = {
