@@ -90,13 +90,6 @@ to run test manually
 `$ npm run test:acceptance:watch`
 
 ## What is missing?
-- Error handling for requests
 - loading interactions
-- unit test coverage
-- docker image script creator
-- error pages
 - aria accessibility
-- DB table for categories description
-- remove hardcoded string from the client, add internationalization
-- improve and clean step_definitions for acceptance test
 

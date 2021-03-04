@@ -6,8 +6,8 @@ import Detail from "../detail";
 const View = (): ReactElement => (
   <>
     <Switch>
-      <Route exact path="/" component={Home} />
       <Route path="/workouts/:alias" component={Detail} />
+      <Route exact path="/" component={Home} />
     </Switch>
   </>
 );

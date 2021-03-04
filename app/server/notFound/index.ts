@@ -4,17 +4,16 @@ import controller from "./controller";
 
 const router = Router();
 
-const renderSPA = (req: Request, res: Response, next: NextFunction) => {
-  const { pageData } = res.locals;
-  if (!pageData) {
-    next();
-  }
+const renderNotFound = (req: Request, res: Response, next: NextFunction) => {
+  const pageData = {
+    title: "NOT FOUND",
+  };
 
   const config = {
     data: pageData,
     url: req.url,
   };
-
+  res.status(404);
   res.send(
     `
     <!DOCTYPE html>
@@ -25,6 +24,6 @@ const renderSPA = (req: Request, res: Response, next: NextFunction) => {
   );
 };
 
-router.get("*", renderSPA);
+router.get("*", renderNotFound);
 
 export default router;

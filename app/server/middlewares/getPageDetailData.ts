@@ -8,10 +8,12 @@ export default (req: Request, res: Response, next: NextFunction): void => {
   workoutsService
     .getItem("alias", req.params.alias)
     .then((response) => {
-      res.locals.pageData = {
-        title: siteName,
-        itemDetail: response,
-      };
+      if (response) {
+        res.locals.pageData = {
+          title: siteName,
+          itemDetail: response,
+        };
+      }
       next();
     })
     .catch((error) => next(error));
