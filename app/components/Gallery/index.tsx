@@ -75,7 +75,9 @@ const Gallery = (): ReactElement => {
       name,
       alias,
       startDate,
+      thumbnailDefault,
       thumbnailMedium,
+      thumbnailHigh,
       category,
     }: GalleryItemProps) => {
       children.push(
@@ -85,6 +87,8 @@ const Gallery = (): ReactElement => {
           name={name}
           alias={alias}
           startDate={startDate}
+          thumbnailDefault={thumbnailDefault}
+          thumbnailHigh={thumbnailHigh}
           thumbnailMedium={thumbnailMedium}
           category={category}
         />

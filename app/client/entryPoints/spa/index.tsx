@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
-import View from "../../pages/spa";
+import View from "../../../pages/spa";
 import configureStore, { history } from "./configureStore";
 
-import "../../pages/spa/styles.scss";
+import "../../../pages/spa/styles.scss";
 
 declare global {
   interface Window {

@@ -3,8 +3,8 @@ const config = require("config");
 
 module.exports = {
   entry: {
-    spa: "./app/client/spa/index.tsx",
-    notFound: "./app/client/notFound/index.tsx",
+    spa: "./app/client/entryPoints/spa/index.tsx",
+    notFound: "./app/client/entryPoints/notFound/index.tsx",
   },
   output: {
     path: `${__dirname}/${config.get("app.staticsFolder")}`,

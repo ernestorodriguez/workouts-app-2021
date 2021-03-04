@@ -7,6 +7,8 @@ export interface GalleryItemProps {
   alias: string;
   startDate: string;
   thumbnailMedium: string;
+  thumbnailDefault: string;
+  thumbnailHigh: string;
   category: string;
 }
 
@@ -15,13 +17,22 @@ const GalleryItem = ({
   name,
   alias,
   startDate,
+  thumbnailDefault,
   thumbnailMedium,
+  thumbnailHigh,
   category,
 }: GalleryItemProps): ReactElement => (
   <article className="gallery-item" data-js="gallery-item" data-id={id}>
     <NavLink className="gallery-item_link" exact to={`/workouts/${alias}`}>
       <div className="gallery-item__image-container">
-        <img className="gallery-item__image" src={thumbnailMedium} alt="" />
+        <img
+          srcSet={`${thumbnailMedium} 480w, ${thumbnailHigh} 800w`}
+          sizes="(max-width: 600px) 480px, 800px"
+          loading="lazy"
+          className="gallery-item__image"
+          src={thumbnailDefault}
+          alt=""
+        />
       </div>
       <div className="gallery-item_info">
         <div className="gallery-item_info-name">{name}</div>

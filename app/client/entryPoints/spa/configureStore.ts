@@ -3,7 +3,7 @@ import { applyMiddleware, createStore, PreloadedState, Store} from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
-import createRootReducer from "../reducers/createRootReducerClient";
+import createRootReducer from "../../reducers/createRootReducerClient";
 
 export const history = createBrowserHistory();
 
