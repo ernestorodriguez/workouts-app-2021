@@ -80,16 +80,19 @@ run each task on separated bash terminal
 `$ npm run start:dev`
 
 ## Testing
-### acceptance
-To run te acceptance on console
+### Unit test
+to run unit test
+`$ npm run test:unit`
+### Acceptance 
+fist build and load the app
+`$ npm run build && npm run start:dev`
 
+To run the acceptance test on console
 `$ npm run test:acceptance`
 
-to run test manually
-
+to run test with ui interface
 `$ npm run test:acceptance:watch`
 
 ## What is missing?
-- loading interactions
-- aria accessibility
-
+- Aria accessibility.
+- Express endpoints integration test.

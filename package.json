@@ -11,6 +11,7 @@
     "build:server:watch": "tsc --watch",
     "start:dev": "NODE_ENV=development nodemon ./dist/app.js",
     "start": "NODE_ENV=prod node ./dist/app.js",
+    "test": "npm run test:unit && npm run test:acceptance",
     "test:unit": "jest --coverage",
     "test:unit:watch": "npm run test:unit -- --watch",
     "test:acceptance": "cypress run --spec **/*.feature",
