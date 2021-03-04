@@ -12,12 +12,22 @@
 .gallery-item__image-container {
   overflow: hidden;
   border-radius: 10px;
+  position: relative;
+}
+
+.gallery-item:hover .gallery-item__image {
+  transform: scale(1.5) translate(0, 20px);
 }
 
 .gallery-item__image {
   width: 100%;
   height: auto;
-  transform: scale(1.05);
+  transition: all 300ms ease-out;
+  transform: scale(1.2) translate(0, 10px);
+}
+
+.gallery-item__image--loading {
+  position: absolute;
 }
 
 .gallery-item__category {

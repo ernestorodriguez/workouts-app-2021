@@ -62,6 +62,7 @@ const Layout = ({
         <main id="root-app" className="main-container">
           {children}
         </main>
+        <script src="/vendors.js" />
         <script src={`/${pageId}.js`} />
       </body>
     </>

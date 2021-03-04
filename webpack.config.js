@@ -10,6 +10,17 @@ module.exports = {
     path: `${__dirname}/${config.get("app.staticsFolder")}`,
   },
   devtool: "inline-source-map",
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
+  },
   module: {
     rules: [
       {
